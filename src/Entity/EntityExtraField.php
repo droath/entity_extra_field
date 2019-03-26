@@ -193,7 +193,11 @@ class EntityExtraField extends ConfigEntityBase implements EntityWithPluginColle
       return [];
     }
 
-    return $field_type_plugin->build();
+    return [
+      '#field' => $this,
+      '#theme' => 'entity_extra_field',
+      'content' => $field_type_plugin->build()
+    ];
   }
 
   /**

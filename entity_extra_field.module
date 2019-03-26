@@ -73,6 +73,20 @@ function entity_extra_field_form_alter(
 }
 
 /**
+ * Implements hook_theme().
+ */
+function entity_extra_field_theme($existing, $type, $theme, $path) {
+  return [
+    'entity_extra_field' => [
+      'render element' => 'element',
+      'path' => $path . '/templates',
+      'file' => 'entity_extra_field.theme',
+      'template' => 'entity-extra-field'
+    ]
+  ];
+}
+
+/**
  * Entity extra field display.
  *
  * @param $type

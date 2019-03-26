@@ -1,0 +1,46 @@
+<?php
+
+/**
+ * @file
+ * The theme implementation for the entity extra field.
+ */
+
+use Drupal\entity_extra_field\Entity\EntityExtraFieldInterface;
+
+/**
+ * The template entity extra field preprocess.
+ */
+function template_preprocess_entity_extra_field(&$variables) {
+  $element = $variables['element'];
+  $extra_field = $element['#field'];
+
+  $variables['content'] = $element['content'];
+  $variables['attributes']['class'][] = 'extra-field';
+
+  if ($extra_field instanceof EntityExtraFieldInterface) {
+    $field_class_name = entity_extra_field_class_string([
+      $extra_field->name()
+    ]);
+    $variables['attributes']['class'][] = 'extra-field--' . $field_class_name;
+    $variables['attributes']['class'][] = 'extra-field--type-' . $extra_field->getFieldTypePluginId();
+  }
+  $variables['content_attributes']['class'][] = 'extra-field--content';
+}
+
+/**
+ * Format values into a class string.
+ *
+ * @param array $values
+ *   An array of class values.
+ * @param string $delimiter
+ *   A space delimiter to use between concatenated classes.
+ *
+ * @return string
+ *   The concatenated class string.
+ */
+function entity_extra_field_class_string(array $values, $delimiter = '-') {
+  return implode(
+    $delimiter,
+    array_map('\Drupal\Component\Utility\Html::getClass', $values)
+  );
+}
