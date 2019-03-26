@@ -1,0 +1,46 @@
+entity_extra_field.extra_field.*.*.*:
+  type: config_entity
+  label: Entity Field
+  mapping:
+    id:
+      type: string
+      label: Entity extra field identifier
+    label:
+      type: string
+      label: Entity extra field label
+    name:
+      type: string
+      label: Entity extra field machine name
+    description:
+      type: text
+      label: Entity extra field description
+    base_entity_type_id:
+      type: string
+      label: Base entity type identifier
+    base_bundle_type_id:
+      type: string
+      label: Base bundle type identifier
+    field_type_id:
+      type: string
+      label: Extra field type plugin identifier
+    field_type_config:
+      type: entity_extra_field.plugin.[%parent.field_type_id]
+      label: Extra field type plugin configuration
+    display:
+      type: mapping
+      label: Extra field display information
+      mapping:
+        type:
+          type: string
+          label: Extra field display type
+
+entity_extra_field.plugin.block:
+  type: mapping
+  label: extra field plugin block
+  mapping:
+    block_type:
+      type: string
+      label: Block identifier
+    block_config:
+      type: mapping
+      label: Block configuration
